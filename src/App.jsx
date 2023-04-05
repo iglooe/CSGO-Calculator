@@ -51,15 +51,15 @@ export default function App() {
   return (
     <div className="text-center">
       <Header />
-      <div className="text-gray-900 mx-5 mt-12 lg:mt-12 mb-20 lg:mb-32 flex-col justify-center pb-40">
-        <div className="pt-10 py-auto px-96">
-          <div className="bg-gradient-to-t from-transparent from-10% via-slate-400 via-30% to-slate-200 to-90% pt-20 py-64 rounded">
-            <h3 className="font-noto text-5xl pb-32 font-bold leading-snug text-center lg:text-6xl self-center">
+      <div className="text-slate-200 mx-5 mt-12 lg:mt-12 mb-20 lg:mb-32 flex-col justify-center pb-40">
+        <div className="pt-10 py-auto px-40">
+          <div className="bg-none pt-20 py-64 rounded shrink">
+            <h3 className="font-noto text-5xl pb-32 sca font-bold leading-snug text-center lg:text-6xl self-center">
               {headingText}
             </h3>
             <label
               htmlFor="ammount"
-              className="justify-center font-noto text-3xl mt-6 py-1 text-center font-semibold leading-snug self-center"
+              className="justify-center static font-noto flex-none text-3xl mt-6 py-1 shrink-0 text-center font-semibold leading-snug self-center"
             >
               Total Money: <em>$ </em>
             </label>
@@ -70,7 +70,7 @@ export default function App() {
               value={ammount}
               onKeyDown={handleKeyPress}
               onChange={(e) => setAmmount(e.target.value)}
-              className="w-28 flex-col text-xl font-noto"
+              className="w-28 flex-col text-xl font-noto flex-none"
             />
             <label
               htmlFor="caseCost"
@@ -85,11 +85,11 @@ export default function App() {
               placeholder="0.00"
               onKeyDown={handleKeyPress}
               onChange={(e) => setCaseCost(e.target.value)}
-              className="w-28 flex-col text-xl"
+              className="w-28 flex-col text-xl flex-none"
             />
             <button
               type="submit"
-              className="bg-amber-400 hover:bg-amber-300 text-zinc-800 font-bold text-2xl py-2 px-4 rounded"
+              className="bg-amber-400 flex-none hover:bg-amber-300 text-zinc-800 font-bold text-2xl py-2 px-4 rounded"
               value={maxCases}
               onClick={handleButtonClick}
             >
