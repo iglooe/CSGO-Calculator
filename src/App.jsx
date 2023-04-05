@@ -5,14 +5,15 @@ import Header from "./assets/components/header";
 export default function App() {
   const [ammount, setAmmount] = React.useState("");
   const [caseCost, setCaseCost] = React.useState("");
-  const [maxCases, setMaxCases] = React.useState("0");
+  const [maxCases, setMaxCases] = React.useState("");
   const [totalCost, setTotalCost] = React.useState("0");
-  const [headingText, setHeadingText] = React.useState("Try it out!");
+  const [headingText, setHeadingText] = React.useState("Enter custom values!");
 
   function calculateMaxCases(ammount, caseCost) {
-    const maxCases = Math.floor(ammount / (caseCost + 2.5));
+    const maxCases = Math.floor(ammount / (caseCost + 2.65));
+    const addTax = maxCases * 1.0825 + maxCases;
 
-    const totalCost = maxCases;
+    const totalCost = addTax + maxCases;
 
     return {
       maxCases: maxCases,
@@ -29,54 +30,72 @@ export default function App() {
       enteredChar !== "Delete" &&
       enteredChar !== "ArrowLeft" &&
       enteredChar !== "ArrowRight" &&
-      enteredChar !== "."
+      enteredChar !== "." &&
+      enteredChar !== "Tab"
     ) {
       e.preventDefault();
     }
   }
   function handleButtonClick() {
     const result = calculateMaxCases(parseFloat(ammount), parseFloat(caseCost));
+    if (isNaN(result.maxCases) || isNaN(result.totalCost)) {
+      setHeadingText("Please enter a number.");
+      return;
+    }
+
     setMaxCases(result.maxCases);
     setTotalCost(result.totalCost);
     setHeadingText("You can buy " + result.maxCases + " cases.");
   }
 
   return (
-    <div>
+    <div className="text-center">
       <Header />
-      <div className="m-0 mx-auto p-2 text-center max-w-7xl">
-        <div className="pt-10 py-auto">
-          <h3 class="font-sans text-xl pb-5 font-bold">{headingText}</h3>
-          <label htmlFor="ammount" className="text-xl">
-            Total Money
-          </label>
-          <input
-            type="text"
-            id="ammount"
-            placeholder="0"
-            value={ammount}
-            onKeyDown={handleKeyPress}
-            onChange={(e) => setAmmount(e.target.value)}
-          />
-          <label htmlFor="caseCost" className="text-xl">
-            Case Cost
-          </label>
-          <input
-            type="text"
-            id="caseCost"
-            value={caseCost}
-            placeholder="0"
-            onKeyDown={handleKeyPress}
-            onChange={(e) => setCaseCost(e.target.value)}
-          />
-          <button
-            type="submit"
-            class="bg-slate-600 hover:bg-slate-700 text-slate-50 font-bold py-2 px-4 rounded"
-            value={maxCases}
-            onClick={handleButtonClick}
-          >
-            Button
-          </button>
+      <div className="text-gray-900 mx-5 mt-12 lg:mt-12 mb-20 lg:mb-32 flex-col justify-center pb-40">
+        <div className="pt-10 py-auto px-96">
+          <div className="bg-gradient-to-t from-transparent from-10% via-slate-400 via-30% to-slate-200 to-90% pt-20 py-64 rounded">
+            <h3 className="font-noto text-5xl pb-32 font-bold leading-snug text-center lg:text-6xl self-center">
+              {headingText}
+            </h3>
+            <label
+              htmlFor="ammount"
+              className="justify-center font-noto text-3xl mt-6 py-1 text-center font-semibold leading-snug self-center"
+            >
+              Total Money: <em>$ </em>
+            </label>
+            <input
+              type="text"
+              id="ammount"
+              placeholder="0.00"
+              value={ammount}
+              onKeyDown={handleKeyPress}
+              onChange={(e) => setAmmount(e.target.value)}
+              className="w-28 flex-col text-xl font-noto"
+            />
+            <label
+              htmlFor="caseCost"
+              className="font-noto text-3xl mt-6 py-1 text-center font-semibold leading-snug self-center"
+            >
+              Case Cost <em>$ </em>
+            </label>
+            <input
+              type="text"
+              id="caseCost"
+              value={caseCost}
+              placeholder="0.00"
+              onKeyDown={handleKeyPress}
+              onChange={(e) => setCaseCost(e.target.value)}
+              className="w-28 flex-col text-xl"
+            />
+            <button
+              type="submit"
+              className="bg-amber-400 hover:bg-amber-300 text-zinc-800 font-bold text-2xl py-2 px-4 rounded"
+              value={maxCases}
+              onClick={handleButtonClick}
+            >
+              Calculate
+            </button>
+          </div>
         </div>
       </div>
     </div>
