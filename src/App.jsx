@@ -6,7 +6,7 @@ export default function App() {
   const [ammount, setAmmount] = React.useState("");
   const [caseCost, setCaseCost] = React.useState("");
   const [maxCases, setMaxCases] = React.useState("");
-  const [totalCost, setTotalCost] = React.useState("0");
+  const [, setTotalCost] = React.useState("0");
   const [headingText, setHeadingText] = React.useState("Enter custom values!");
 
   function calculateMaxCases(ammount, caseCost) {
@@ -51,17 +51,14 @@ export default function App() {
   return (
     <div className="text-center">
       <Header />
-      <div className="text-slate-200 mx-5 mt-12 lg:mt-12 mb-20 lg:mb-32 flex-col justify-center pb-40">
-        <div className="pt-10 py-auto px-40">
-          <div className="bg-none pt-20 py-64 rounded shrink">
-            <h3 className="font-noto text-5xl pb-32 sca font-bold leading-snug text-center lg:text-6xl self-center">
-              {headingText}
-            </h3>
+      <div className="text-slate-200 flex">
+        <div className="w-full p-32 grid grid-cols-2 align-middle gap-4 rounded-lg">
+          <div className="grid w-max p-24 gap-4 bg-slate-600 rounded-xl shadow-zinc-600 shadow-2xl border-2 shrink">
             <label
               htmlFor="ammount"
-              className="justify-center static font-noto flex-none text-3xl mt-6 py-1 shrink-0 text-center font-semibold leading-snug self-center"
+              className="font-noto text-3xl font-semibold h-12 pt-2 align-middle"
             >
-              Total Money: <em>$ </em>
+              Total Money: $
             </label>
             <input
               type="text"
@@ -70,13 +67,13 @@ export default function App() {
               value={ammount}
               onKeyDown={handleKeyPress}
               onChange={(e) => setAmmount(e.target.value)}
-              className="w-28 flex-col text-xl font-noto flex-none"
+              className="w-28 h-12 text-xl font-noto placeholder-stone-600 outline-4 outline-amber-400 text-right"
             />
             <label
               htmlFor="caseCost"
-              className="font-noto text-3xl mt-6 py-1 text-center font-semibold leading-snug self-center"
+              className="font-noto text-3xl text-center font-semibold h-12 p-2"
             >
-              Case Cost <em>$ </em>
+              Case Cost: $
             </label>
             <input
               type="text"
@@ -85,17 +82,22 @@ export default function App() {
               placeholder="0.00"
               onKeyDown={handleKeyPress}
               onChange={(e) => setCaseCost(e.target.value)}
-              className="w-28 flex-col text-xl flex-none"
+              className="w-28 h-12 text-xl font-noto placeholder-stone-600 outline-amber-400 text-right"
             />
             <button
               type="submit"
-              className="bg-amber-400 flex-none hover:bg-amber-300 text-zinc-800 font-bold text-2xl py-2 px-4 rounded"
+              className="bg-amber-400 hover:bg-amber-300 col-span-2 w-full h-12 text-zinc-800 font-bold mt-8 text-2xl rounded"
               value={maxCases}
               onClick={handleButtonClick}
             >
               Calculate
             </button>
           </div>
+        </div>
+        <div className="bg-none w-full mr-12 p-32">
+          <h3 className="font-noto text-5xl lg:text-6xl align-middle px-24 py-32 border-t-8">
+            {headingText}
+          </h3>
         </div>
       </div>
     </div>
