@@ -7,10 +7,12 @@ export default function App() {
   const [caseCost, setCaseCost] = React.useState("");
   const [maxCases, setMaxCases] = React.useState("");
   const [, setTotalCost] = React.useState("0");
-  const [headingText, setHeadingText] = React.useState("Enter custom values!");
+  const [headingText, setHeadingText] = React.useState(
+    "Enter your custom values!"
+  );
 
   function calculateMaxCases(ammount, caseCost) {
-    const maxCases = Math.floor(ammount / (caseCost + 2.65));
+    const maxCases = Math.floor(ammount / (caseCost + 2.5));
     const addTax = maxCases * 1.0825 + maxCases;
 
     const totalCost = addTax + maxCases;
@@ -45,14 +47,14 @@ export default function App() {
 
     setMaxCases(result.maxCases);
     setTotalCost(result.totalCost);
-    setHeadingText("You can buy " + result.maxCases + " cases.");
+    setHeadingText(`You can buy ${result.maxCases} cases.`);
   }
 
   return (
     <div className="text-center">
       <Header />
       <div className="text-slate-200 flex">
-        <div className="w-full p-32 grid grid-cols-2 align-middle gap-4 rounded-lg">
+        <div className="w-full p-32 grid-container sm:m-18 grid grid-cols-2 align-middle gap-4 rounded-lg">
           <div className="grid w-max p-24 gap-4 bg-slate-600 rounded-xl shadow-zinc-600 shadow-2xl border-2 shrink">
             <label
               htmlFor="ammount"
