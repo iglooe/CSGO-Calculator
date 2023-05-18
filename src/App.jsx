@@ -12,14 +12,11 @@ export default function App() {
   );
 
   function calculateMaxCases(ammount, caseCost) {
-    const maxCases = Math.floor(ammount / (caseCost + 2.5));
-    const addTax = maxCases * 1.0825 + maxCases;
-
-    const totalCost = addTax + maxCases;
+    const maxCases = Math.floor(ammount / (caseCost + 2.695));
 
     return {
       maxCases: maxCases,
-      totalCost: totalCost.toFixed(2),
+      totalCost: maxCases.toFixed(2),
     };
   }
 
